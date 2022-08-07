@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 50px;
+            height: 50px;
+            background-color: peru;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: all 400ms;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+
+<!--    <script src="./src/app.js" async defer></script>-->
+<!--    <script src="./src/variables.js" async defer></script>-->
+<!--    <script src="./src/functions.js" async defer></script>-->
+<!--    <script src="./src/iteration.js" async defer></script>-->
+<!--    <script src="./src/asynchronous.js" async defer></script>-->
+    <script src="./src/guess_game.js" async defer></script>
+</head>
+<body>
+
+<!--<button id="btn">Hack me!</button>-->
+<!--<div class="box"></div>-->
+<form action="" id="rangeForm">
+    <label for="min">Min zakresu</label>
+    <input type="number" id="min">
+
+    <label for="max">Max zakresu</label>
+    <input type="number" id="max">
+
+    <button id="confirmation">Podaje dane</button>
+</form>
+
+<form action="" id="guessForm" class="hide">
+    <label for="guessDigit">Zgadnij se:</label>
+    <input type="number", id="guessDigit">
+
+    <button id="guessBtn">Zgaduje</button>
+    <div id="message"></div>
+</form>
+
+</body>
+</html>
