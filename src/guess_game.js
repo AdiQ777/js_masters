@@ -16,21 +16,20 @@ const guessBtnRef = guessFormRef.querySelector('#guessBtn');
 const messageRef = guessFormRef.querySelector('#message');
 
 const isNotEmpty = (value) => value !== '';
-const isNotEmptyRange = (a, b) => a < b;
-const drawDigit = (min, max) => Math.round(Math.random() * (max - min) + min);
+const isNotEmptyRange = (a, b) => parseInt(a, 10) < parseInt(b, 10);
+
+const drawDigit = (min, max) => Math.round((Math.random() * (max - min)) + min);
 const checkHit = (userDigit, drawnDigit) => {
     if (userDigit < drawnDigit) {
         return 'Za mało';
     } else if (userDigit > drawnDigit) {
         return 'Za dużo';
     } else {
-        return 'Zgadłeś';
+        return 'Zgadłeś. Koniec gry';
     }
 }
 
-let drawnDigit;
-
-confirmationRef.addEventListener('click', (evt) => {
+const response = new Promise((resolve) => confirmationRef.addEventListener('click', (evt) => {
     evt.preventDefault();
 
     const userMin = minRef.value;
@@ -39,14 +38,20 @@ confirmationRef.addEventListener('click', (evt) => {
     if (isNotEmpty(userMin) && isNotEmpty(userMax) && isNotEmptyRange(userMin, userMax)){
         formRangeRef.classList.add('hide');
         guessFormRef.classList.remove('hide');
-        drawnDigit = drawDigit(userMin, userMax);
+        resolve(drawDigit(userMin, userMax));
     }
 
-})
+}));
+response
+    .then((x) => console.log(x));
 
-guessBtnRef.addEventListener('click', (event) => {
-    event.preventDefault();
-    const hit = guessDigitRef.value;
+response
+    .then((x) => {
+        guessBtnRef.addEventListener('click', (event) => {
+            event.preventDefault();
+            const hit = guessDigitRef.value;
 
-    messageRef.innerText = checkHit(hit, drawnDigit);
-})
+            messageRef.innerText = checkHit(hit, x);
+
+        });
+    });
